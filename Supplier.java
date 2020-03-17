@@ -3,12 +3,22 @@
  */
 public class Supplier {
     private String name;
-    private Integer phone;
+    private String phone;
     private String adress;
-    private Integer zipCode;
+    private String zipCode;
 
-    public Supplier() {
-
+    /**
+     * 
+     * @param name
+     * @param phone
+     * @param adress
+     * @param zipCode
+     */
+    public Supplier(String name, String phone, String adress, String zipCode) {
+        this.name = name;
+        this.phone = phone;
+        this.adress = adress;
+        this.zipCode = zipCode;
     }
 
     /**
@@ -28,14 +38,14 @@ public class Supplier {
     /**
      * @return the phone
      */
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -56,14 +66,14 @@ public class Supplier {
     /**
      * @return the zipCode
      */
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
     /**
      * @param zipCode the zipCode to set
      */
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

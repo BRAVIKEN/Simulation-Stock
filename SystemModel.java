@@ -1,19 +1,57 @@
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * SystemModel
  */
 public class SystemModel {
     private SystemController controller;
-    private List<Checkout>
+    private SystemView view;
+    private ArrayList<Checkout> checkouts;
+    // private ArrayList<Item> stock;
+    private Stock stock;
 
     public SystemModel() {
+        stock = new Stock();
+
+        checkouts = new ArrayList<Checkout>();
     }
-    
+
+    public void init(SystemView v, SystemController c) {
+        view = v;
+        controller = c;
+    }
+
+    public Item getItem(Integer item) {
+        Item i = null;
+        try {
+            i = this.stock.getAllItems().get(item);
+        } catch (IndexOutOfBoundsException e) {
+        }
+        return i;
+    }
+
     /**
-     * @param controller the controller to set
+     * @return the stock
      */
-    public void setController(SystemController controller) {
-        this.controller = controller;
+    public Stock getStock() {
+        return this.stock;
     }
+
+    /**
+     * @return the all items
+     */
+    public ArrayList<Item> getAllItems() {
+        return this.stock.getAllItems();
+    }
+
+    public void createOrder(Integer item, Integer amount) {
+        Item i = null;
+        try {
+            i = this.stock.getAllItems().get(item);
+            i.createOrder(amount);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid item");
+        }
+    }
+
 }

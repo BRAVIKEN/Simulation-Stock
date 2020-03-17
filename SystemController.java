@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * SystemController
  */
@@ -6,6 +8,12 @@ public class SystemController {
     private SystemView view;
 
     public SystemController() {
+
+    }
+
+    public void init(SystemModel m, SystemView v) {
+        model = m;
+        view = v;
     }
 
     /**
@@ -20,5 +28,19 @@ public class SystemController {
      */
     public void setView(SystemView view) {
         this.view = view;
+    }
+
+    public void displayStock() {
+        ArrayList<Item> stock = this.model.getAllItems();
+        this.view.displayStock(stock);
+    }
+
+    /**
+     * 
+     * @param i
+     */
+    public void displayItem(Integer i) {
+        Item item = this.model.getItem(i);
+        this.view.displayItem(item);
     }
 }

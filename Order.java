@@ -6,10 +6,22 @@ public class Order {
     private Supplier supplier;
     private Integer quantity;
     private Double price;
-    private Integer date;
+    private String date;
 
-    public Order() {
-
+    /**
+     * 
+     * @param item
+     * @param supplier
+     * @param quantity
+     * @param price
+     * @param date
+     */
+    public Order(Item item, Supplier supplier, Integer quantity, Double price, String date) {
+        this.item = item;
+        this.supplier = supplier;
+        this.quantity = quantity;
+        this.price = price;
+        this.date = date;
     }
 
     /**
@@ -71,15 +83,19 @@ public class Order {
     /**
      * @return the date
      */
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public void print() {
+        System.out.println("BZBZBZBZBZBBZBZBZB, j'imprime la money $$$ !");
     }
 
 }

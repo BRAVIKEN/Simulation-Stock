@@ -1,28 +1,30 @@
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Basket
  */
 public class Basket {
-    private List<Item> basket;
+    private ArrayList<Item> basket;
     private Double balance;
     private Boolean payed;
 
     public Basket() {
-
+        this.basket = new ArrayList<Item>();
+        this.balance = 0.0;
+        this.payed = false;
     }
 
     /**
      * @return the basket
      */
-    public List<Item> getBasket() {
+    public ArrayList<Item> getBasket() {
         return basket;
     }
 
     /**
      * @param basket the basket to set
      */
-    public void setBasket(List<Item> basket) {
+    public void setBasket(ArrayList<Item> basket) {
         this.basket = basket;
     }
 
@@ -52,6 +54,22 @@ public class Basket {
      */
     public void setPayed(Boolean payed) {
         this.payed = payed;
+    }
+
+    public void addItem(Item item) {
+        this.basket.add(item);
+        this.balance += item.getPrice();
+    }
+
+    public void removeItem(Item item) {
+        this.basket.remove(item);
+        this.balance -= item.getPrice();
+    }
+
+    public void printTicket() {
+        this.basket.forEach(e -> {
+            System.out.println(e.getName() + "\t" + e.getPrice() + "\n");
+        });
     }
 
 }

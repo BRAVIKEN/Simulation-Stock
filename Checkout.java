@@ -1,49 +1,32 @@
-import java.util.List;
-
 /**
  * Checkout
  */
 public class Checkout {
-    private Double balance;
-    private List<Basket> items;
 
-    public Checkout() {
-        CheckoutView checkView = new CheckoutView();
-        CheckoutModel checkModel = new CheckoutModel();
-        CheckoutController checkController = new CheckoutController();
+    private CheckoutView checkView;
+    private CheckoutModel checkModel;
+    private CheckoutController checkController;
 
-        checkController.setModel(checkModel);
-        checkController.setView(checkView);
-        checkView.setController(checkController);
-        checkModel.setController(checkController);
+    public Checkout(SystemModel setSysModel, SystemView setSysView, Stock theS) {
+
+        this.checkView = new CheckoutView();
+        this.checkModel = new CheckoutModel();
+        this.checkController = new CheckoutController();
+
+        checkModel.init(setSysModel, setSysView);
+
+        checkModel.setMVC(checkModel, checkView, checkController);
+        checkView.setMVC(checkModel, checkView, checkController);
+        checkController.setMVC(checkModel, checkView, checkController);
+
+        checkModel.setStock(theS);
+
     }
 
-    /**
-     * @return the balance
-     */
-    public Double getBalance() {
-        return balance;
-    }
+    public void start() {
 
-    /**
-     * @param balance the balance to set
-     */
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
+        checkView.proccessCommand();
 
-    /**
-     * @return the items
-     */
-    public List<Basket> getItems() {
-        return items;
-    }
-
-    /**
-     * @param items the items to set
-     */
-    public void setItems(List<Basket> items) {
-        this.items = items;
     }
 
 }

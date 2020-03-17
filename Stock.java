@@ -1,27 +1,48 @@
-import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Stock
  */
 public class Stock {
-    private List<Item> items;
+    // private ArrayList<Item> items;
+    private HashMap<Integer, Item> codeToStock;
 
     public Stock() {
-        
+        codeToStock = new HashMap<Integer, Item>();
     }
 
     /**
-     * @return the items
+     * 
+     * @param toAdd
      */
-    public List<Item> getItems() {
-        return items;
+    public void addItem(Item toAdd) {
+        codeToStock.put(toAdd.getBarCode(), toAdd);
     }
 
     /**
-     * @param items the items to set
+     * 
+     * @param items
      */
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void decrementBasket(ArrayList<Item> items) {
+        items.forEach((item) -> {
+            item.setQuantity(item.getQuantity() - 1);
+        });
+
+    }
+
+    public HashMap<Integer, Item> getCodeToStock() {
+        return codeToStock;
+    }
+
+    public ArrayList<Item> getAllItems() {
+        ArrayList<Item> toRet = new ArrayList<Item>();
+
+        for (Item item : codeToStock.values()) {
+            toRet.add(item);
+        }
+
+        return toRet;
     }
 
 }

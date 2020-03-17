@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Item
  */
@@ -11,8 +14,27 @@ public class Item {
     private Supplier supplier;
     private Order order;
 
-    public Item() {
-
+    /**
+     * 
+     * @param name
+     * @param barCode
+     * @param price
+     * @param quantity
+     * @param threshold
+     * @param weight
+     * @param supplier
+     * @param order
+     */
+    public Item(String name, Integer barCode, Double price, Integer quantity, Integer threshold, Boolean weight,
+            Supplier supplier, Order order) {
+        this.name = name;
+        this.barCode = barCode;
+        this.price = price;
+        this.quantity = quantity;
+        this.threshold = threshold;
+        this.weight = weight;
+        this.supplier = supplier;
+        this.order = order;
     }
 
     /**
@@ -125,6 +147,13 @@ public class Item {
      */
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public void createOrder(int amount) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+
+        order = new Order(this, this.supplier, amount, this.price, formatter.format(date));
     }
 
 }
