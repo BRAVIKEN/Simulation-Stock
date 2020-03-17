@@ -8,7 +8,14 @@ public class Checkout {
     private List<Basket> items;
 
     public Checkout() {
+        CheckoutView checkView = new CheckoutView();
+        CheckoutModel checkModel = new CheckoutModel();
+        CheckoutController checkController = new CheckoutController();
 
+        checkController.setModel(checkModel);
+        checkController.setView(checkView);
+        checkView.setController(checkController);
+        checkModel.setController(checkController);
     }
 
     /**

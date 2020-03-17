@@ -6,14 +6,14 @@ import java.lang.ModuleLayer.Controller;
 public class Main {
 
     public static void main(String[] args) {
-        SystemView view = new SystemView();
-        SystemModel model = new SystemModel();
-        SystemController controller = new SystemController();
+        SystemView sysView = new SystemView();
+        SystemModel sysModel = new SystemModel();
+        SystemController sysController = new SystemController();
 
-        controller.setModel(model);
-        controller.setView(view);
-        view.setController(controller);
-        model.setController(controller);
+        sysController.setModel(sysModel);
+        sysController.setView(sysView);
+        sysView.setController(sysController);
+        sysModel.setController(sysController);
     }
     
 }
