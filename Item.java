@@ -6,18 +6,27 @@ import java.util.Date;
  */
 public class Item {
     private String name;
-    private Integer barCode;
+    private int barCode;
     private Double price;
-    private Integer quantity;
-    private Integer threshold;
+    private int quantity;
+    private int threshold;
     private Boolean weight;
     private Supplier supplier;
     private Order order;
 
+    public Item() {
+        this.name = "";
+        this.price = 0.0;
+        this.quantity = 0;
+        this.threshold = 0;
+        this.weight = false;
+        this.supplier = null;
+        this.order = null;
+    }
+
     /**
      * 
      * @param name
-     * @param barCode
      * @param price
      * @param quantity
      * @param threshold
@@ -25,10 +34,9 @@ public class Item {
      * @param supplier
      * @param order
      */
-    public Item(String name, Integer barCode, Double price, Integer quantity, Integer threshold, Boolean weight,
+    public Item(String name, Double price, int quantity, int threshold, Boolean weight,
             Supplier supplier, Order order) {
         this.name = name;
-        this.barCode = barCode;
         this.price = price;
         this.quantity = quantity;
         this.threshold = threshold;
@@ -54,14 +62,14 @@ public class Item {
     /**
      * @return the barCode
      */
-    public Integer getBarCode() {
+    public int getBarCode() {
         return barCode;
     }
 
     /**
      * @param barCode the barCode to set
      */
-    public void setBarCode(Integer barCode) {
+    public void setBarCode(int barCode) {
         this.barCode = barCode;
     }
 
@@ -82,28 +90,28 @@ public class Item {
     /**
      * @return the quantity
      */
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
     /**
      * @return the threshold
      */
-    public Integer getThreshold() {
+    public int getThreshold() {
         return threshold;
     }
 
     /**
      * @param threshold the threshold to set
      */
-    public void setThreshold(Integer threshold) {
+    public void setThreshold(int threshold) {
         this.threshold = threshold;
     }
 
@@ -153,7 +161,7 @@ public class Item {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
 
-        order = new Order(this, this.supplier, amount, this.price, formatter.format(date));
+        order = new Order(this, this.supplier, amount, this.price * amount, formatter.format(date));
     }
 
 }

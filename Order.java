@@ -4,7 +4,7 @@
 public class Order {
     private Item item;
     private Supplier supplier;
-    private Integer quantity;
+    private int quantity;
     private Double price;
     private String date;
 
@@ -16,7 +16,7 @@ public class Order {
      * @param price
      * @param date
      */
-    public Order(Item item, Supplier supplier, Integer quantity, Double price, String date) {
+    public Order(Item item, Supplier supplier, int quantity, Double price, String date) {
         this.item = item;
         this.supplier = supplier;
         this.quantity = quantity;
@@ -55,14 +55,14 @@ public class Order {
     /**
      * @return the quantity
      */
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -95,7 +95,7 @@ public class Order {
     }
 
     public void print() {
-        System.out.println("BZBZBZBZBZBBZBZBZB, j'imprime la money $$$ !");
+        // System.out.println("BZBZBZBZBZBBZBZBZB, j'imprime la money $$$ !");
     }
 
 }

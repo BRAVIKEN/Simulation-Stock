@@ -7,6 +7,13 @@ public class Supplier {
     private String adress;
     private String zipCode;
 
+    public Supplier() {
+        this.name = "";
+        this.phone = "";
+        this.adress = "";
+        this.zipCode = "";
+    }
+
     /**
      * 
      * @param name
@@ -77,4 +84,26 @@ public class Supplier {
         this.zipCode = zipCode;
     }
 
+    public void edit(int i, String value) {
+        switch (i) {
+            case 0:
+                setName(value);
+                break;
+
+            case 1:
+                setPhone(value);;
+                break;
+
+            case 2:
+                setAdress(value);;
+                break;
+
+            case 3:
+                setZipCode(value);;
+                break;
+
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }

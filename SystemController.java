@@ -1,46 +1,26 @@
+
 import java.util.ArrayList;
 
 /**
  * SystemController
  */
 public class SystemController {
-    private SystemModel model;
-    private SystemView view;
+    private SystemMVC mvc;
 
     public SystemController() {
-
     }
 
-    public void init(SystemModel m, SystemView v) {
-        model = m;
-        view = v;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(SystemModel model) {
-        this.model = model;
-    }
-
-    /**
-     * @param view the view to set
-     */
-    public void setView(SystemView view) {
-        this.view = view;
+    public void init(SystemMVC sysmvc) {
+        mvc = sysmvc;
+        displayStock();
     }
 
     public void displayStock() {
-        ArrayList<Item> stock = this.model.getAllItems();
-        this.view.displayStock(stock);
+        mvc.view.displayStock(mvc.model.getAllItems());
     }
 
-    /**
-     * 
-     * @param i
-     */
-    public void displayItem(Integer i) {
-        Item item = this.model.getItem(i);
-        this.view.displayItem(item);
+    public void displayItem(int i) {
+        Item item = mvc.model.getItem(i);
+        // mvc.view.displayItem(item);
     }
 }

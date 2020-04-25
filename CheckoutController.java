@@ -1,43 +1,44 @@
+import java.util.ArrayList;
+
 /**
  * CheckoutController
  */
-public class CheckoutController extends MVC {
+public class CheckoutController {
+    private CheckoutMVC mvc;
+    
     public CheckoutController() {
-        super();
     }
 
-    public void scanBarCode(int barCode) {
-        checkModel.getSysView().displayItem(checkModel.getSysModel().getStock().getCodeToStock().get(barCode));
-        checkModel.addItemFromBarcode(barCode);
+    public void init(CheckoutMVC comvc) {
+        mvc = comvc;
+    }
+
+    public Item scanBarCode(int barCode) {
+        // mvc.system.view.displayItem(mvc.system.model.getStock().getCodeToStock().get(barCode));
+        return mvc.model.addItemFromBarcode(barCode);
     }
 
     public void basketSold(Basket theBasket) {
-
-        checkModel.getSysModel().getStock().decrementBasket(theBasket.getBasket());
-
+        mvc.system.model.getStock().decrementBasket(theBasket.getBasket());
     }
 
-    public void returnItem(int codebar) {
-        Item i = checkModel.getSysModel().getStock().getCodeToStock().get(codebar);
+    public int returnItem(int codebar) {
+        Item i = mvc.system.model.getStock().getCodeToStock().get(codebar);
+        if (i == null) return 0;
         i.setQuantity(i.getQuantity() + 1);
+        return 1;
     }
 
-    public void printActualBasketTicket() {
-
-        this.checkModel.printActualBasketTicket();
-
+    public Basket printActualBasketTicket() {
+        return this.mvc.model.printActualBasketTicket();
     }
 
-    public void printAllTickets() {
-        checkModel.getItems().forEach(e -> {
-            System.out.println("Basket:");
-            e.printTicket();
-            System.out.println("");
-        });
+    public ArrayList<Basket> printAllTickets() {
+        return mvc.model.getItems();
     }
 
     public void openCashDrawer() {
-        System.out.println("The cash drawer is opening");
+        // System.out.println("The cash drawer is opening");
     }
 
 }

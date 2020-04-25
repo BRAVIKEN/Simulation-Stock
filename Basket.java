@@ -66,10 +66,4 @@ public class Basket {
         this.balance -= item.getPrice();
     }
 
-    public void printTicket() {
-        this.basket.forEach(e -> {
-            System.out.println(e.getName() + "\t" + e.getPrice() + "\n");
-        });
-    }
-
 }

@@ -3,38 +3,22 @@ import java.util.ArrayList;
 /**
  * CheckoutModel
  */
-public class CheckoutModel extends MVC {
-    // private CheckoutController controller;
-    private SystemModel sysModel;
-    private SystemView sysView;
+public class CheckoutModel {
+    private CheckoutMVC mvc;
     private Double balance;
     private ArrayList<Basket> baskets;
-
-    private Stock stock;
-
     private Boolean onBasket;
 
     public CheckoutModel() {
-        super();
-
         onBasket = false;
 
         balance = 0.0;
 
         baskets = new ArrayList<Basket>();
-
     }
 
-    public void setStock(Stock theS) {
-        stock = theS;
-    }
-
-    public void init(SystemModel setSysModel, SystemView setSysView) {
-
-        sysModel = setSysModel;
-
-        sysView = setSysView;
-
+    public void init(CheckoutMVC comvc) {
+        mvc = comvc;
     }
 
     /**
@@ -65,40 +49,28 @@ public class CheckoutModel extends MVC {
         this.baskets = newBaskets;
     }
 
-    public void addItemFromBarcode(Integer code) {
-
+    public Item addItemFromBarcode(int code) {
         if (!onBasket) {
             onBasket = true;
-
             baskets.add(new Basket());
-
         }
 
-        Item i = this.stock.getCodeToStock().get(code);
+        Item i = mvc.system.model.getStock().getCodeToStock().get(code);
+        if (i == null) return null;
+
         this.baskets.get(this.baskets.size() - 1).addItem(i);
         i.setQuantity(i.getQuantity() - 1);
-
+        return i;
     }
 
-    public void printActualBasketTicket() {
-
+    public Basket printActualBasketTicket() {
         if (onBasket) {
-
-            this.baskets.get(this.baskets.size() - 1).printTicket();
-
+            return this.baskets.get(this.baskets.size() - 1);
         }
-
+        return null;
     }
 
     public void endCurentBasket() {
         onBasket = false;
-    }
-
-    public SystemModel getSysModel() {
-        return sysModel;
-    }
-
-    public SystemView getSysView() {
-        return sysView;
     }
 }

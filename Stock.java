@@ -12,12 +12,41 @@ public class Stock {
         codeToStock = new HashMap<Integer, Item>();
     }
 
-    /**
-     * 
-     * @param toAdd
-     */
-    public void addItem(Item toAdd) {
-        codeToStock.put(toAdd.getBarCode(), toAdd);
+    public void addItem(Item... items) {
+        for (Item item : items) {
+            item.setBarCode(codeToStock.size());
+            codeToStock.put(item.getBarCode(), item);
+        }
+    }
+
+    public void editItem(Item item, int i, String value) {
+        Item it = codeToStock.get(item.getBarCode());
+
+        switch (i) {
+            case 0:
+                it.setName(value);
+                break;
+            
+            case 2:
+                it.setPrice(Double.parseDouble(value));
+                break;
+            
+            case 3:
+                it.setQuantity(Integer.parseInt(value));
+                break;
+            
+            case 4:
+                it.setThreshold(Integer.parseInt(value));
+                break;
+            
+            case 5:
+                it.setWeight(Boolean.parseBoolean(value));
+                break;
+        
+            default:
+                throw new IllegalArgumentException();
+            // break;
+        }
     }
 
     /**
@@ -44,5 +73,10 @@ public class Stock {
 
         return toRet;
     }
+
+    public void removeItem(Item item) {
+        Item i = codeToStock.remove(item.getBarCode());
+    }
+
 
 }
