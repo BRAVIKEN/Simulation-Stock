@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import com.stock_sim.system.*;
-
-=======
->>>>>>> 9a5b25c4422d4de755cdd880d09b068e14c8a2fc
-/**
  * Main
  */
 public class Main {
