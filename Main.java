@@ -1,6 +1,5 @@
 import com.stock_sim.system.*;
- * Main
- */
+
 public class Main {
 
     public static void main(String[] args) {
