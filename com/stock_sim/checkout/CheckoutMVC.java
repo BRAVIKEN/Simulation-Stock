@@ -1,8 +1,11 @@
+package com.stock_sim.checkout;
+import com.stock_sim.system.*;
+
 public class CheckoutMVC {
-    protected CheckoutModel model;
-    protected CheckoutView view;
-    protected CheckoutController controller;
-    protected SystemMVC system;
+    public CheckoutModel model;
+    public CheckoutView view;
+    public CheckoutController controller;
+    public SystemMVC system;
 
     public CheckoutMVC(SystemMVC sys) {
         model = new CheckoutModel();

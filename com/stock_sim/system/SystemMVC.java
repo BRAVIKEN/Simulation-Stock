@@ -1,8 +1,9 @@
+package com.stock_sim.system;
 
 public class SystemMVC {
-    protected SystemModel model;
-    protected SystemView view;
-    protected SystemController controller;
+    public SystemModel model;
+    public SystemView view;
+    public SystemController controller;
 
     public SystemMVC() {
         model = new SystemModel();
