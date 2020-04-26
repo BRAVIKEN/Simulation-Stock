@@ -16,13 +16,12 @@ public class Stock {
 
     public void addItem(Item... items) {
         for (Item item : items) {
-            item.setBarCode(codeToStock.size());
-            codeToStock.put(item.getBarCode(), item);
+            codeToStock.put(item.getId(), item);
         }
     }
 
     public void editItem(Item item, int i, String value) {
-        Item it = codeToStock.get(item.getBarCode());
+        Item it = codeToStock.get(item.getId());
 
         switch (i) {
             case 0:
@@ -77,7 +76,9 @@ public class Stock {
     }
 
     public void removeItem(Item item) {
-        Item i = codeToStock.remove(item.getBarCode());
+        System.out.println(item.getId());
+        Item i = codeToStock.remove(item.getId());
+        System.out.println(codeToStock.get(i.getId()));
     }
 
 

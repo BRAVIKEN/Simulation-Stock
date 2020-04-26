@@ -2,7 +2,7 @@ package com.stock_sim.system;
 
 import java.util.ArrayList;
 import com.stock_sim.utils.*;
-
+import com.stock_sim.persistence.*;
 
 /**
  * SystemModel
@@ -12,12 +12,9 @@ public class SystemModel {
     private Stock stock;
     private ArrayList<Supplier> suppliers;
 
-    public SystemModel() {
+    public SystemModel(SystemMVC sysmvc) {
         stock = new Stock();
         suppliers = new ArrayList<Supplier>();
-    }
-
-    public void init(SystemMVC sysmvc) {
         mvc = sysmvc;
     }
 
@@ -25,10 +22,22 @@ public class SystemModel {
         this.stock.addItem(items);
     }
 
+    public void createItemDB(Item item) {
+        mvc.sys.getPersistence().insertItem(item);
+    }
+
+    public void deleteItemDB(Item item) {
+        mvc.sys.getPersistence().deleteItem(item);
+    }
+
     public void addSupplier(Supplier... sup) {
         for (Supplier s: sup) {
             suppliers.add(s);
         }
+    }
+
+    public void createSupplierDB(Supplier supplier) {
+        mvc.sys.getPersistence().insertSupplier(supplier);
     }
 
     public Supplier getSupplier(int i) {

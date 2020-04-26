@@ -7,8 +7,8 @@ import java.util.Date;
  * Item
  */
 public class Item {
+    private int _id;
     private String name;
-    private int barCode;
     private Double price;
     private int quantity;
     private int threshold;
@@ -36,8 +36,9 @@ public class Item {
      * @param supplier
      * @param order
      */
-    public Item(String name, Double price, int quantity, int threshold, Boolean weight,
+    public Item(Integer id, String name, Double price, int quantity, int threshold, Boolean weight,
             Supplier supplier, Order order) {
+        this._id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -45,6 +46,20 @@ public class Item {
         this.weight = weight;
         this.supplier = supplier;
         this.order = order;
+    }
+
+    /**
+     * @return the _id
+     */
+    public int getId() {
+        return _id;
+    }
+
+    /**
+     * @param _id the _id to set
+     */
+    public void setId(int _id) {
+        this._id = _id;
     }
 
     /**
@@ -59,20 +74,6 @@ public class Item {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the barCode
-     */
-    public int getBarCode() {
-        return barCode;
-    }
-
-    /**
-     * @param barCode the barCode to set
-     */
-    public void setBarCode(int barCode) {
-        this.barCode = barCode;
     }
 
     /**
@@ -163,7 +164,7 @@ public class Item {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
 
-        order = new Order(this, this.supplier, amount, this.price * amount, formatter.format(date));
+        // order = new Order(amount, this.price * amount, formatter.format(date));
     }
 
 }

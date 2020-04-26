@@ -4,6 +4,7 @@ package com.stock_sim.utils;
  * Supplier
  */
 public class Supplier {
+    private int _id;
     private String name;
     private String phone;
     private String adress;
@@ -23,11 +24,19 @@ public class Supplier {
      * @param adress
      * @param zipCode
      */
-    public Supplier(String name, String phone, String adress, String zipCode) {
+    public Supplier(Integer id, String name, String phone, String adress, String zipCode) {
+        this._id = id;
         this.name = name;
         this.phone = phone;
         this.adress = adress;
         this.zipCode = zipCode;
+    }
+
+    /**
+     * @return the _id
+     */
+    public int getId() {
+        return _id;
     }
 
     /**

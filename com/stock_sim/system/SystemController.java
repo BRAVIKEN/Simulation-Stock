@@ -9,11 +9,11 @@ import com.stock_sim.utils.*;
 public class SystemController {
     private SystemMVC mvc;
 
-    public SystemController() {
+    public SystemController(SystemMVC sysmvc) {
+        mvc = sysmvc;
     }
 
-    public void init(SystemMVC sysmvc) {
-        mvc = sysmvc;
+    public void init() {
         displayStock();
     }
 

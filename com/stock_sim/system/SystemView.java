@@ -22,11 +22,11 @@ public class SystemView implements ActionListener {
     private JButton newItem;
     private JButton print;
 
-    public SystemView() {
+    public SystemView(SystemMVC sysmvc) {
+        mvc = sysmvc;
     }
 
-    public void init(SystemMVC sysmvc) {
-        mvc = sysmvc;
+    public void init() {
         createWindow();
         createTable();
         createCommands();
@@ -123,7 +123,7 @@ public class SystemView implements ActionListener {
                         String input = inputDialog("Create order", "Enter the amount");
                         if (input != null) {
                             int amount = Integer.parseInt(input);
-                            mvc.model.createOrder(item.getBarCode(), amount);
+                            mvc.model.createOrder(item.getId(), amount);
                             order.setText("Cancel order");
                         }
                     } else {
@@ -142,6 +142,7 @@ public class SystemView implements ActionListener {
                 int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the item ?");
                 if (input == 0) {
                     mvc.model.removeItem(item);
+                    mvc.model.deleteItemDB(item);
                     refreshStock();
                 }
             }
@@ -192,7 +193,7 @@ public class SystemView implements ActionListener {
         str[0][1] = item.getName();
 
         str[1][0] = "Barcode";
-        str[1][1] = Integer.toString(item.getBarCode());
+        str[1][1] = Integer.toString(item.getId());
 
         str[2][0] = "Price";
         str[2][1] = Double.toString(item.getPrice());
@@ -239,8 +240,8 @@ public class SystemView implements ActionListener {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (tab.getSelectedRows()[0] == 6) {
+                    int index = -1;
                     if (item.getSupplier() == null) {
-                        int index;
                         JComboBox cb;
                         ArrayList<Supplier> suppliers = mvc.model.getAllSuppliers();
                         int size = suppliers.size() + 1;
@@ -264,7 +265,12 @@ public class SystemView implements ActionListener {
                             return;
                         }
                     }
-                    displaySupplier(item.getSupplier());
+                    int res = displaySupplier(item.getSupplier());
+                    if (res == 1 && index == size - 1) {
+                        mvc.model.createSupplierDB(item.getSupplier());
+                    } else {
+                        item.setSupplier(null);
+                    }
                 }
             }
         });
@@ -335,9 +341,14 @@ public class SystemView implements ActionListener {
         return optionPane.showInputDialog(null, message, title, JOptionPane.QUESTION_MESSAGE);
     }
 
-    public void messageDialog(String title, JPanel tab) {
+    public int messageDialog(String title, JPanel tab) {
+        String[] options = { "OK", "Cancel" };
+
         JOptionPane optionPane = new JOptionPane();
-        optionPane.showMessageDialog(null, new JScrollPane(tab), title, JOptionPane.INFORMATION_MESSAGE);
+        int choice = optionPane.showOptionDialog(null, new JScrollPane(tab), title, JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+
+        return choice == 0 ? 1 : -1;
     }
 
     public int comboDialog(String title, JComboBox combo) {
@@ -356,12 +367,12 @@ public class SystemView implements ActionListener {
         }
     }
 
-    public void displayItem(Item item) {
-        messageDialog(item.getName(), createItemPanel(item));
+    public int displayItem(Item item) {
+        return messageDialog(item.getName(), createItemPanel(item));
     }
 
-    public void displaySupplier(Supplier supplier) {
-        messageDialog(supplier.getName(), createSupplierPanel(supplier));
+    public int displaySupplier(Supplier supplier) {
+        return messageDialog(supplier.getName(), createSupplierPanel(supplier));
     }
 
     public void refreshStock() {
@@ -375,7 +386,11 @@ public class SystemView implements ActionListener {
         } else if (e.getSource() == newItem) {
             Item item = new Item();
             mvc.model.addItem(item);
-            displayItem(item);
+            if (displayItem(item) == 1) {
+                mvc.model.createItemDB(item);
+            } else {
+                mvc.model.removeItem(item);
+            }
             refreshStock();
         } else if (e.getSource() == print) {
 

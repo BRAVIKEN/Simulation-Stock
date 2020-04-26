@@ -4,8 +4,7 @@ package com.stock_sim.utils;
  * Order
  */
 public class Order {
-    private Item item;
-    private Supplier supplier;
+    private int _id;
     private int quantity;
     private Double price;
     private String date;
@@ -18,40 +17,18 @@ public class Order {
      * @param price
      * @param date
      */
-    public Order(Item item, Supplier supplier, int quantity, Double price, String date) {
-        this.item = item;
-        this.supplier = supplier;
+    public Order(int id, int quantity, Double price, String date) {
+        this._id = id;
         this.quantity = quantity;
         this.price = price;
         this.date = date;
     }
 
     /**
-     * @return the item
+     * @return the _id
      */
-    public Item getItem() {
-        return item;
-    }
-
-    /**
-     * @param item the item to set
-     */
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    /**
-     * @return the supplier
-     */
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    /**
-     * @param supplier the supplier to set
-     */
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public int getId() {
+        return _id;
     }
 
     /**
@@ -95,9 +72,4 @@ public class Order {
     public void setDate(String date) {
         this.date = date;
     }
-
-    public void print() {
-        // System.out.println("BZBZBZBZBZBBZBZBZB, j'imprime la money $$$ !");
-    }
-
 }
